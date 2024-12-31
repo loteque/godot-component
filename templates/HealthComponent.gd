@@ -2,9 +2,9 @@
 extends ComponentNode
 class_name HealthComponent
 
-@export var resource = ComponentResource.new(self):
-    set(r):
-        resource = r
-        resource.component = self
+@export var health: float:
+    set(f):
+        health = f
+        health_changed.emit(health)
 
-signal health_changed(health, sender: HealthComponent)
+signal health_changed(health)
