@@ -2,7 +2,12 @@
 extends ComponentNode
 class_name HealthComponent
 
-@export var health: float:
+@export var max_health: float = 100.0:
+    set(f):
+        max_health = f
+        max_health_changed.emit(max_health)
+
+@export var health: float = max_health:
     set(f):
         if f == health:
             return
@@ -14,11 +19,6 @@ class_name HealthComponent
             return
         health = f
         health_changed.emit(health)
-
-@export var max_health: float:
-    set(f):
-        health = f
-        max_health_changed.emit(max_health)
 
 @export var invincible: bool = false:
     set(b):

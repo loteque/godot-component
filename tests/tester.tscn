@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc37yldpiif4t"]
+
+[ext_resource type="Script" path="res://tests/Tester.gd" id="1_mx4ih"]
+[ext_resource type="Script" path="res://tests/test_health_component.gd" id="2_xlfs7"]
+[ext_resource type="Script" path="res://tests/test_example.gd" id="3_0f6cw"]
+[ext_resource type="Script" path="res://templates/HealthComponent.gd" id="4_ktu4i"]
+
+[node name="Tester" type="Node"]
+script = ExtResource("1_mx4ih")
+
+[node name="TestExample" type="Node" parent="."]
+script = ExtResource("3_0f6cw")
+
+[node name="TestHealthComponent" type="Node" parent="."]
+script = ExtResource("2_xlfs7")
+module_ = ExtResource("4_ktu4i")
