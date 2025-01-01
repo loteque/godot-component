@@ -50,15 +50,15 @@ func print_result(assertion_name: StringName, result: Result) -> void:
     var rich_result: String
     if result.value:
         rich_result = (
-            "[rainbow freq=0.2 sat=0.8 val=0.8][b]"
+            "[color=lime_green][b]"
             +result.status
-            +"[/b]"
+            +"[/b][/color]"
         )
     else:
         rich_result = (
-            "[shake rate=50.0 level=3 connected=0][color=orange_red][b]"
+            "[color=orange_red][b]"
             +result.status
-            +"[/b][/color][/shake]"
+            +"[/b][/color]"
         )
     print_rich(result.type, " ", assertion_name, " ", result.value, " ", rich_result);
 
