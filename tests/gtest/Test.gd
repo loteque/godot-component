@@ -4,10 +4,10 @@ class_name Test
 
 @export var run_test: bool:
     set(b):
-        Tester.load_test(self)
-        Tester.run_tests()
+        TestRunner.load_test(self)
+        TestRunner.run_tests()
         run_test = false
-        Tester.unload_tests()
+        TestRunner.unload_tests()
 
 var module
 var assertions: Array[Assertion]

@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://dc37yldpiif4t"]
 
-[ext_resource type="Script" path="res://tests/Tester.gd" id="1_mx4ih"]
+[ext_resource type="Script" path="res://tests/gtest/TestRunner.gd" id="1_eavik"]
 [ext_resource type="Script" path="res://tests/test_health_component.gd" id="2_xlfs7"]
 [ext_resource type="Script" path="res://tests/test_example.gd" id="3_0f6cw"]
 
 [node name="Tester" type="Node"]
-script = ExtResource("1_mx4ih")
+script = ExtResource("1_eavik")
 
 [node name="TestExample" type="Node" parent="."]
 script = ExtResource("3_0f6cw")

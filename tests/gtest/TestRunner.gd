@@ -1,6 +1,6 @@
 @tool
 extends Node
-class_name Tester
+class_name TestRunner
 
 @export var run_tests_: bool:
     set(b):
