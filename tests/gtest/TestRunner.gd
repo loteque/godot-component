@@ -1,42 +1,37 @@
 @tool
-extends Node
+extends Test
 class_name TestRunner
 
-@export var run_tests_: bool:
+@export var run_test_: bool:
     set(b):
-        load_tests(self)
-        run_tests()
-        run_tests_ = false
-        unload_tests()
+        run_test()
+        run_test_ = false
 
-static var loaded: Array[Node]
+var result: Array[Result]
 
-static func load_test(test: Test):
-    var instance = test.get_script().new()
-    loaded.append(instance)
+func init_test() -> Test:
+    var script: Script = get_script()
+    return script.new()
 
-static func load_tests(tester_node: Node):
-    for child in tester_node.get_children():
-        load_test(child)
-
-static func unload_tests():
-    loaded.clear()
-
-static func run_test(test: Test) -> void:
+func run_test() -> void:
+    var test = init_test()
+    test.setup()
+    test.setup_module()
     print_rich(GString.bbc_bold_string(test.test_path))
-    test.init_module()
-    test.run_assertions()
+    for assertion in test.assertions:
+        result.append(assertion.execute())
+        test.reset_module()
+    print_result()
+    test.reset()
+    result.clear()
 
-static func run_tests() -> void:
-    for test in loaded:
-        run_test(test)
-    
-static func print_result(assertion_name: StringName, result: Test.Result) -> void:
-    var success: bool
-    match result.status:
-        Test.Result.Status.SUCCESS:
-            success = true
-        Test.Result.Status.FAILURE:
-            success = false
-    var rich_result = GString.bbc_success_fail_string(success, result.message, "lime_green", "orange_red")
-    print_rich(result.type, " ", assertion_name, " ", result.value, " ", rich_result);
+func print_result() -> void:
+    for r in result: 
+        var success: bool
+        match r.status: 
+            Test.Result.Status.SUCCESS:
+                success = true
+            Test.Result.Status.FAILURE:
+                success = false
+        var rich_result = GString.bbc_success_fail_string(success, r.message, "lime_green", "orange_red")
+        print_rich(r.type, " ", r.assertion_name, " ", r.value, " ", rich_result);

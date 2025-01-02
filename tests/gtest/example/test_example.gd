@@ -1,8 +1,7 @@
 @tool
-extends Test
+extends TestRunner
 
-func init_module() -> void:
-    assertions.append_array(get_assertions())
+func setup_module() -> void:
     module = null
 
 var identify := Assertion.new(

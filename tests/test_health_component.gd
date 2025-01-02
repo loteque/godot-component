@@ -1,9 +1,8 @@
 @tool
-extends Test
+extends TestRunner
 
-func init_module() -> void:
-    assertions.append_array(get_assertions())
-    module = load("res://templates/HealthComponent.gd").new() as HealthComponent
+func setup_module():
+    module = preload("res://templates/HealthComponent.gd").new() as HealthComponent
 
 func reset_module():
     module.revivable = true
@@ -19,7 +18,6 @@ var init_health_is_max_health := Assertion.new(
 
 var can_set_module_property := Assertion.new(
     func():
-    reset_module()
     module.health = 50
     return module.health == 50
 )
