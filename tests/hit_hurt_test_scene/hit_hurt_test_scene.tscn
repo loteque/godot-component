@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqpbav6j72dwf"]
+
+[ext_resource type="Script" path="res://tests/hit_hurt_test_scene/hit_hurt_test_scene.gd" id="1_6nqe4"]
+[ext_resource type="Script" path="res://templates/HitBoxComponent2D.gd" id="1_p0hri"]
+[ext_resource type="Script" path="res://templates/HurtBoxComponent2D.gd" id="2_vumxo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtlgk"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x10k4"]
+size = Vector2(40, 40)
+
+[node name="HitHurtTestSCene" type="Node2D"]
+script = ExtResource("1_6nqe4")
+
+[node name="HitBoxComponent2D" type="Area2D" parent="." node_paths=PackedStringArray("sender")]
+position = Vector2(197, 103)
+monitoring = false
+monitorable = false
+script = ExtResource("1_p0hri")
+sender = NodePath(".")
+cooldown = 10.0
+active = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent2D"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_wtlgk")
+
+[node name="ColorRect" type="ColorRect" parent="HitBoxComponent2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0, 0.133333, 1)
+
+[node name="HurtBoxComponent2D" type="Area2D" parent="." node_paths=PackedStringArray("reciever")]
+position = Vector2(181, 83)
+monitoring = false
+script = ExtResource("2_vumxo")
+reciever = NodePath(".")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent2D"]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_x10k4")
+
+[node name="ColorRect" type="ColorRect" parent="HurtBoxComponent2D"]
+modulate = Color(1, 1, 1, 0.584314)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.519558, 0.519558, 0.519558, 1)
